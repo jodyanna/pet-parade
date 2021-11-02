@@ -1,0 +1,60 @@
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.username {
+  font-size: 1.6em;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.profileRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  font-size: 1.2em;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.profileImage {
+  width: 188px;
+  border-radius: 50%;
+  margin: 0 0 0.5rem 0;
+  outline: 1px #76808d solid;
+}
+
+.button {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  font-size: 1.2em;
+  color: #48477e;
+  font-weight: bold;
+  background-color: inherit;
+  border: 1px solid #48477e;
+  border-radius: 5px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #48477e;
+  color: #f5f5f5;
+}
+
+.icon {
+  width: 16px;
+  height: 24px;
+  margin: 0 0.5rem 0 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    display: none;
+  }
+}

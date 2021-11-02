@@ -1,0 +1,39 @@
+.speciesSelect {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.speciesSelectRight {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 0 auto;
+}
+
+.selectInput {
+  box-sizing: border-box;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #302f55;
+}
+
+.selectInput:hover {
+  cursor: pointer;
+}
+
+.selectInputRight {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #302f55;
+}
+
+.selectInputRight:hover {
+  cursor: pointer;
+}

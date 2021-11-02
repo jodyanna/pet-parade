@@ -1,0 +1,50 @@
+
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem;
+}
+
+.display {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.nav {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  width: 100%;
+  padding: 0 0 1rem 0;
+  border-bottom: 1px solid #121212;
+}
+
+.navItem {
+  font-size: 1.2em;
+  outline: none;
+  border: none;
+  background-color: inherit;
+}
+
+.navItemSelected {
+  font-size: 1.2em;
+  outline: none;
+  border: none;
+  background-color: inherit;
+  border-bottom: 2px solid #48477e;
+}
+
+.navItem:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.button {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem 4rem;
+  font-size: 1.2em;
+  color: #48477e;
+  font-weight: bold;
+  background-color: inherit;
+  border: 1px solid #48477e;
+  border-radius: 5px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #48477e;
+  color: #f5f5f5;
+}

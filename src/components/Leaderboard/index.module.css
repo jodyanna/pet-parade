@@ -1,0 +1,90 @@
+
+.container {
+
+}
+
+.formContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid #302f55;
+}
+
+.speciesSelectLabel {
+  font-size: 1.2em;
+}
+
+.submit {
+  box-sizing: border-box;
+  margin: 0 0 0 auto;
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  color: #48477e;
+  font-weight: bold;
+  background-color: inherit;
+  border: 1px solid #48477e;
+  border-radius: 5px;
+}
+
+.submit:hover {
+  cursor: pointer;
+  background-color: #48477e;
+  color: #f5f5f5;
+}
+
+.display {
+  width: 600px;
+}
+
+.noResults {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  font-size: 1.5em;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+
+  .formContainer {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid #302f55;
+  }
+
+  .submit {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    font-size: 1em;
+    color: #48477e;
+    font-weight: bold;
+    background-color: inherit;
+    border: 1px solid #48477e;
+    border-radius: 5px;
+  }
+
+  .display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}

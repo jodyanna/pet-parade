@@ -1,0 +1,52 @@
+.form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 80%;
+  margin: 1rem 0 2rem 0;
+  padding: 0;
+  border-bottom: 2px solid #302f55;
+}
+
+.heading {
+  margin: 0;
+}
+
+.fieldContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0;
+}
+
+.textInput {
+  box-sizing: border-box;
+  width: 25%;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  border: 1px solid #302f55;
+}
+
+.submit {
+  box-sizing: border-box;
+  margin: 0 0 0 auto;
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  color: #48477e;
+  font-weight: bold;
+  background-color: inherit;
+  border: 1px solid #48477e;
+  border-radius: 5px;
+}
+
+.submit:hover {
+  cursor: pointer;
+  background-color: #48477e;
+  color: #f5f5f5;
+}
