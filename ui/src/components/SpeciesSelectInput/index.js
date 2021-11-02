@@ -5,7 +5,7 @@ export default function SpeciesSelectInput({species, setSpecies, hasAny, alignRi
   const [allSpecies, setAllSpecies] = useState([]);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URI + "/species", {
+    fetch("/species", {
       method: "GET",
       headers: {
         "content-type": "application/json"

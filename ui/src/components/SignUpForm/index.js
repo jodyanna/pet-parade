@@ -38,7 +38,7 @@ export default function SignUpForm({login, triggerRedirect, handleError}) {
             "email": email,
           }
 
-          const newUser = await fetch(process.env.REACT_APP_API_URI + "/users/signup", {
+          const newUser = await fetch("/users/signup", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -57,11 +57,11 @@ export default function SignUpForm({login, triggerRedirect, handleError}) {
             .catch(error => console.log(error));
 
           if (newUser !== undefined) {
-            newUser.token = await fetch(process.env.REACT_APP_API_URI + "/auth", {
+            newUser.token = await fetch("/auth", {
               method: "POST",
               body: JSON.stringify({
-                "username": newUser.email,
-                "password": newUser.password
+                "username": email,
+                "password": password
               }),
               headers: {
                 "content-type": "application/json"

@@ -9,7 +9,7 @@ export default function SpeciesForm({user}) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    fetch(process.env.REACT_APP_API_URI + "/species/save", {
+    fetch("/species/save", {
       method: "POST",
       body: JSON.stringify({
         id: null,

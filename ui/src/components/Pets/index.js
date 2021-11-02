@@ -15,7 +15,7 @@ export default function Pets({user, login}) {
       const allPets = [];
 
       for (let i = 0; i < ids.length; i++) {
-        const response = await fetch(process.env.REACT_APP_API_URI + "/pets/" + ids[i], {
+        const response = await fetch("/pets/" + ids[i], {
           method: "GET",
           headers: {
             "content-type": "application/json",

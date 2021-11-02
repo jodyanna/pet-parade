@@ -8,7 +8,7 @@ export default function Home({user}) {
 
   useEffect(() => {
     // Request recently created pets
-    fetch("http://localhost:8080/pets/recent", {
+    fetch("/pets/recent", {
       method: "GET",
       headers: {
         "content-type": "application/json"

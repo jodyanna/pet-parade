@@ -11,7 +11,7 @@ export default function PetRatingForm({user, pet, petImage, handleClick}) {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const newRating = await fetch(process.env.REACT_APP_API_URI + "/ratings", {
+    const newRating = await fetch("/ratings", {
       method: "POST",
       body: JSON.stringify({
         rating: rating,

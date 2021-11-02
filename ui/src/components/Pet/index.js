@@ -18,7 +18,7 @@ export default function Pet({user, pet, login}) {
   const handleReportClick = () => setIsReportFormVisible(!isReportFormVisible)
 
   const handleLikeClick = async () => {
-    const response = await fetch("http://localhost:8080/likes", {
+    const response = await fetch("/likes", {
       method: "POST",
       body: JSON.stringify({
         petId: pet.id,
@@ -42,7 +42,7 @@ export default function Pet({user, pet, login}) {
   }
 
   const handleRemoveLikeClick = async () => {
-    const response = await fetch("http://localhost:8080/likes", {
+    const response = await fetch("/likes", {
       method: "DELETE",
       body: JSON.stringify({
         petId: pet.id,
