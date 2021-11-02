@@ -4,7 +4,6 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import userContext from "./context/userContext";
 import './App.css';
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -42,51 +41,49 @@ export default function App() {
   }, []);
 
   return (
-    <userContext.Provider value={{user: user, login: login, logout: logout}}>
-      <Router>
-        <div className="App">
-          <Header user={user} logout={logout} />
-          <Switch>
-            <Route path="/about">
-              <About />
+    <Router>
+      <div className="App">
+        <Header user={user} logout={logout} />
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+
+          {
+            user !== null &&
+            <Route path="/user">
+              <User user={user} login={login} />
             </Route>
+          }
 
-            {
-              user !== null && 
-              <Route path="/user">
-                <User user={user} login={login} />
-              </Route>
-            }
-
-            {
-              user !== null && user.roles.includes("ROLE_ADMIN") &&
-                <Route path="/admin">
-                  <Admin user={user} />
-                </Route>
-            }
-
-            <Route path="/leaderboard">
-              <Leaderboard user={user} />
+          {
+            user !== null && user.roles.includes("ROLE_ADMIN") &&
+            <Route path="/admin">
+              <Admin user={user} />
             </Route>
+          }
 
-            <Route path="/login">
-              <Login login={login} />
-            </Route>
+          <Route path="/leaderboard">
+            <Leaderboard user={user} />
+          </Route>
 
-            <Route path="/signup">
-              <SignUp login={login} />
-            </Route>
+          <Route path="/login">
+            <Login login={login} />
+          </Route>
 
-            <Route exact path="/">
-              <Home user={user} />
-            </Route>
+          <Route path="/signup">
+            <SignUp login={login} />
+          </Route>
 
-            <Route path="*">
-              <FourZeroFour />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </userContext.Provider>
+          <Route exact path="/">
+            <Home user={user} />
+          </Route>
+
+          <Route path="*">
+            <FourZeroFour />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
