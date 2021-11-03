@@ -26,56 +26,79 @@ export default function SignUpForm({login, triggerRedirect, handleError}) {
   const handleEmailChange = e => setEmail(e.target.value)
   const handlePasswordChange = e => setPassword(e.target.value)
 
-  const handleSubmit = e => {
+  const createNewUser = async () => {
+    try {
+      const response = await fetch("/users/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          "username": username,
+          "password": password,
+          "email": email,
+        }),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        handleError({
+          isError: true,
+          message: `The email: "${email}" is already registered.`
+        });
+
+        return null
+      } else {
+        return response.json()
+      }
+    } catch (e) {
+      console.error(e);
+
+      return null
+    }
+  }
+
+  const fetchToken = async () => {
+    try {
+      const response = await fetch("/auth", {
+        method: "POST",
+        body: JSON.stringify({
+          "username": email,
+          "password": password
+        }),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+
+      if (response.ok) {
+        return response.json();
+      } else {
+        return null
+      }
+    } catch (e) {
+      console.error(e);
+
+      return null;
+    }
+  }
+
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    validateForm()
-      .then(async isValid => {
-        if (isValid) {
-          const data = {
-            "username": username,
-            "password": password,
-            "email": email,
-          }
+    // Validate form, exit if invalid
+    const isValid = await validateForm();
+    if (!isValid) return;
 
-          const newUser = await fetch("/users/signup", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-              "content-type": "application/json"
-            }
-          }).then(res => res.json())
-            .then(res => {
-              if (res.status === 500) {
-                handleError({
-                  isError: true,
-                  message: `The email "${email}" is already registered.`
-                })
-              }
-              else return res;
-            })
-            .catch(error => console.log(error));
+    const newUser = await createNewUser();
 
-          if (newUser !== undefined) {
-            newUser.token = await fetch("/auth", {
-              method: "POST",
-              body: JSON.stringify({
-                "username": email,
-                "password": password
-              }),
-              headers: {
-                "content-type": "application/json"
-              }
-            }).then(res => res.json())
-              .catch(error => console.log(error));
+    if (newUser !== null) {
+      newUser.token = await fetchToken();
 
-            // Format date to default api return
-            newUser.dateCreated = newUser.dateCreated.split("T")[0];
-            login(newUser);
-            triggerRedirect();
-          }
-        }
-      })
+      // Format date to default api return
+      newUser.dateCreated = newUser.dateCreated.split("T")[0];
+      login(newUser);
+      triggerRedirect();
+    }
   }
 
   const validateForm = async () => {

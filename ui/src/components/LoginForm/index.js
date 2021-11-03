@@ -20,57 +20,23 @@ export default function LoginForm({login, handleError, triggerRedirect}) {
   const handleEmailChange = e => setEmail(e.target.value)
   const handlePasswordChange = e => setPassword(e.target.value)
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    validateForm()
-      .then(async isValid => {
-        if (isValid) {
-          const token = await fetch("/auth", {
-              method: "POST",
-              body: JSON.stringify({
-                "username": email,
-                "password": password
-              }),
-              headers: {
-                "content-type": "application/json"
-              }
-            })
-            .then(res => {
-              if (res.status === 404 || res.status === 403 || res.status === 400) {
-                handleError({
-                  isError: true,
-                  message: "Login failed. Check email and/or password."
-                });
-              }
-              else {
-                return res;
-              }
-            })
-            .then(res => res.json())
-            .catch(() => handleError({isError: true, message: "Incorrect password."}));
+    // Validate form, exit if invalid
+    const isValid = await validateForm();
+    if (!isValid) return;
 
-          if (token !== undefined) {
-            fetch("/users/login", {
-              method: "POST",
-              body: JSON.stringify({
-                "email": email,
-                "password": password
-              }),
-              headers: {
-                "content-type": "application/json",
-                "authorization": "Bearer " + token.jwt
-              }
-            }).then(res => res.json())
-              .then(res => {
-                res.token = token;
-                login(res);
-                triggerRedirect();
-              })
-              .catch(error => console.log(error))
-          }
-        }
-      })
+    const token = await fetchToken();
+
+    const user = await fetchUser(token);
+
+    if (user !== null) {
+      user.token = token;
+      login(user);
+
+      triggerRedirect();
+    }
   }
 
   const validateForm = async () => {
@@ -104,6 +70,65 @@ export default function LoginForm({login, handleError, triggerRedirect}) {
         message: "",
         isValid: true
       }
+    }
+  }
+
+  const fetchToken = async () => {
+    try {
+      const response = await fetch("/auth", {
+        method: "POST",
+        body: JSON.stringify({
+          "username": email,
+          "password": password
+        }),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        handleError({
+          isError: true,
+          message: "Login failed. Check email and/or password."
+        });
+
+        return null
+      } else {
+        return await response.json()
+      }
+    } catch(e) {
+      console.error(e);
+
+      return null
+    }
+  }
+
+  const fetchUser = async token => {
+    // Exit if token does not exist
+    if (token === null) return null;
+
+    try {
+      const response = await fetch("/users/login", {
+        method: "POST",
+        body: JSON.stringify({
+          "email": email,
+          "password": password
+        }),
+        headers: {
+          "content-type": "application/json",
+          "authorization": "Bearer " + token.jwt
+        }
+      });
+
+      if (response.ok) {
+        return await response.json();
+      } else {
+        return null
+      }
+    } catch (e) {
+      console.error(e);
+
+      return null;
     }
   }
 
