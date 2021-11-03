@@ -36,9 +36,8 @@ export default function LoginForm({login, handleError, triggerRedirect}) {
                 "content-type": "application/json"
               }
             })
-            .then(res => res.json())
             .then(res => {
-              if (res.status === 404 || res.status === 403) {
+              if (res.status === 404 || res.status === 403 || res.status === 400) {
                 handleError({
                   isError: true,
                   message: "Login failed. Check email and/or password."
@@ -48,6 +47,7 @@ export default function LoginForm({login, handleError, triggerRedirect}) {
                 return res;
               }
             })
+            .then(res => res.json())
             .catch(() => handleError({isError: true, message: "Incorrect password."}));
 
           if (token !== undefined) {
